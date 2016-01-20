@@ -5,6 +5,7 @@ var UserProfile = require('./Github/UserProfile');
 var Notes = require('./Notes/notes');
 var ReactFireMixin = require('reactfire');
 var Firebase = require('firebase');
+var helpers = require('../utils/helpers');
 
 var Profile = React.createClass({
   mixins: [ReactFireMixin],
@@ -14,7 +15,7 @@ var Profile = React.createClass({
       bio: {
         name: 'Ryan Jagger'
       },
-      repos: ['a','b','c']
+       repos: ['a','b','c']
     }
   },
   //component lifecycle event
@@ -23,6 +24,15 @@ var Profile = React.createClass({
     var childRef = this.ref.child(this.props.params.username)
     //bindAsArray property added via mixins statement
     this.bindAsArray(childRef, 'notes');
+
+    helpers.getGithubInfo(this.props.params.username)
+      .then(function(data){
+        this.setState({
+          bio: data.bio,
+          repos: data.repos
+        })
+      }.bind(this))
+
   },
   componentWillUnmount: function(){
     this.unbind('notes');
