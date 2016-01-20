@@ -24438,6 +24438,10 @@
 	var Repos = React.createClass({
 	  displayName: 'Repos',
 
+	  propTypes: {
+	    username: React.PropTypes.string.isRequired,
+	    repos: React.PropTypes.array.isRequired
+	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
@@ -24469,6 +24473,10 @@
 	var UserProfile = React.createClass({
 	  displayName: 'UserProfile',
 
+	  propTypes: {
+	    username: React.PropTypes.string.isRequired,
+	    bio: React.PropTypes.object.isRequired
+	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
@@ -24508,23 +24516,23 @@
 	var Notes = React.createClass({
 	  displayName: 'Notes',
 
+	  propTypes: {
+	    username: React.PropTypes.string.isRequired,
+	    notes: React.PropTypes.array.isRequired
+	  },
 	  render: function render() {
 	    //console.log("NOTES", this.props.notes)
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(
-	        'p',
+	        'h3',
 	        null,
-	        React.createElement(
-	          'h3',
-	          null,
-	          ' Notes for ',
-	          this.props.username,
-	          ' '
-	        ),
-	        React.createElement(NotesList, { notes: this.props.notes })
-	      )
+	        ' Notes for ',
+	        this.props.username,
+	        ' '
+	      ),
+	      React.createElement(NotesList, { notes: this.props.notes })
 	    );
 	  }
 	});
